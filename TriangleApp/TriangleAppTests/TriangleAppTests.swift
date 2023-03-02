@@ -26,6 +26,8 @@ class TriangleAppTests: XCTestCase {
             return "Segitiga Sama Sisi"
         } else if sides[0] == sides[1] || sides[1] == sides[2] {
             return "Segitiga Sama Kaki"
+        } else if (!(sides[0] + sides[1] > sides[2]) && (sides[1] + sides[2] > sides[0]) && (sides[0] + sides[2] > sides[1])){
+            throw TriangleError.inequalityInput
         } else {
             return "Segitiga Sembarang"
         }
@@ -44,7 +46,7 @@ class TriangleAppTests: XCTestCase {
     }
     
     func testDetectRandomTriangle() {
-        XCTAssertEqual(try detectTriangle(1, 2, 3), "Segitiga Sembarang")
+        XCTAssertEqual(try detectTriangle(12, 15, 17), "Segitiga Sembarang")
     }
     
     func testInequalityTriangle(){
