@@ -16,8 +16,8 @@ class TriangleAppTests: XCTestCase {
     }
     
     func detectTriangle(_ sideA: Int, _ sideB: Int, _ sideC: Int) throws {
-        if sideA < 1 {
-           throw TriangleError.invalidInput
+        for side in [sideA, sideB, sideC] where side < 1 {
+            throw TriangleError.invalidInput
         }
     }
 }
