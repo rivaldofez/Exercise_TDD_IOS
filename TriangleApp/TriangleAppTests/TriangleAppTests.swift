@@ -26,8 +26,10 @@ class TriangleAppTests: XCTestCase {
             return "Segitiga Sama Sisi"
         } else if sides[0] == sides[1] || sides[1] == sides[2] {
             return "Segitiga Sama Kaki"
+        } else if (!(sides[0] + sides[1] > sides[2]) && (sides[1] + sides[2] > sides[0]) && (sides[0] + sides[2] > sides[1])){
+            throw TriangleError.inequalityInput
         } else {
-            return "Bukan Segitiga Sama Sisi dan Segitiga Sama Kaki"
+            return "Segitiga Sembarang"
         }
     }
     
@@ -38,12 +40,27 @@ class TriangleAppTests: XCTestCase {
     func testDetectIsoscelesTriangle(){
         XCTAssertEqual(try detectTriangle(1, 2, 2), "Segitiga Sama Kaki")
         XCTAssertEqual(try detectTriangle(1, 1, 2), "Segitiga Sama Kaki")
-          XCTAssertEqual(try detectTriangle(1, 2, 1), "Segitiga Sama Kaki")
-          XCTAssertEqual(try detectTriangle(1, 2, 2), "Segitiga Sama Kaki")
-          XCTAssertEqual(try detectTriangle(2, 1, 2), "Segitiga Sama Kaki")
+        XCTAssertEqual(try detectTriangle(1, 2, 1), "Segitiga Sama Kaki")
+        XCTAssertEqual(try detectTriangle(1, 2, 2), "Segitiga Sama Kaki")
+        XCTAssertEqual(try detectTriangle(2, 1, 2), "Segitiga Sama Kaki")
+    }
+    
+    func testDetectRandomTriangle() {
+        XCTAssertEqual(try detectTriangle(12, 15, 17), "Segitiga Sembarang")
+    }
+    
+    func testInequalityTriangle(){
+        XCTAssertThrowsError(try detectTriangle(4, 1, 2)) { error in
+            XCTAssertEqual(error as? TriangleError, TriangleError.inequalityInput)
+        }
+        
+        XCTAssertThrowsError(try detectTriangle(5, 1, 3)) { error in
+            XCTAssertEqual(error as? TriangleError, TriangleError.inequalityInput)
+        }
     }
 }
 
 enum TriangleError: Error {
     case invalidInput
+    case inequalityInput
 }
