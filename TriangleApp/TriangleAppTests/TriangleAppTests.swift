@@ -22,6 +22,8 @@ class TriangleAppTests: XCTestCase {
         
         if sideA == sideB && sideA == sideC {
             return "Segitiga Sama Sisi"
+        } else if sideA == sideB || sideA == sideC || sideB == sideC {
+            return "Segitiga Sama Kaki"
         } else {
             return "Bukan Segitiga Sama Sisi"
         }
