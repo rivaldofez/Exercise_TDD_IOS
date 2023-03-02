@@ -20,7 +20,7 @@ class TriangleAppTests: XCTestCase {
             throw TriangleError.invalidInput
         }
         
-        if sideA == sideB && sideA == sideC && sideB == sideC {
+        if sideA == sideB && sideA == sideC {
             return "Segitiga Sama Sisi"
         } else {
             return "Bukan Segitiga Sama Sisi"
