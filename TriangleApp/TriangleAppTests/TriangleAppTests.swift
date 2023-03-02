@@ -16,16 +16,18 @@ class TriangleAppTests: XCTestCase {
     }
     
     func detectTriangle(_ sideA: Int, _ sideB: Int, _ sideC: Int) throws -> String {
-        for side in [sideA, sideB, sideC] where side < 1 {
+        let sides = [sideA, sideB, sideC].sorted()
+        
+        for side in sides where side < 1 {
             throw TriangleError.invalidInput
         }
         
-        if sideA == sideB && sideA == sideC {
+        if sides[1] == sides[0] && sides[1] == sides[2] {
             return "Segitiga Sama Sisi"
-        } else if sideA == sideB || sideA == sideC || sideB == sideC {
+        } else if sides[0] == sides[1] || sides[1] == sides[2] {
             return "Segitiga Sama Kaki"
         } else {
-            return "Bukan Segitiga Sama Sisi"
+            return "Bukan Segitiga Sama Sisi dan Segitiga Sama Kaki"
         }
     }
     
@@ -35,6 +37,10 @@ class TriangleAppTests: XCTestCase {
     
     func testDetectIsoscelesTriangle(){
         XCTAssertEqual(try detectTriangle(1, 2, 2), "Segitiga Sama Kaki")
+        XCTAssertEqual(try detectTriangle(1, 1, 2), "Segitiga Sama Kaki")
+          XCTAssertEqual(try detectTriangle(1, 2, 1), "Segitiga Sama Kaki")
+          XCTAssertEqual(try detectTriangle(1, 2, 2), "Segitiga Sama Kaki")
+          XCTAssertEqual(try detectTriangle(2, 1, 2), "Segitiga Sama Kaki")
     }
 }
 
